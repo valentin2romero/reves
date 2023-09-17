@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- model.name inherit tree view -->
+    <record id="view_account_invoice_line_report_tree" model="ir.ui.view">
+        <field name="name">PRODUCT IN BOX add prod_in_box</field>
+        <field name="model">account.invoice.report</field>
+        <field name="inherit_id" ref="l10n_ar_ux.view_account_invoice_line_report_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='quantity']" position="after">
+                <field name="in_box_qty" sum="Total"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
