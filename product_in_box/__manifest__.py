@@ -28,7 +28,7 @@
         "product",
         "sale",
         "l10n_ar_ux",
-    ], 
+    ],
     "data": [
         "views/product_template_view.xml",
         "views/sale_order_view.xml",
