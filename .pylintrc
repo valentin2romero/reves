@@ -1,7 +1,7 @@
 [MASTER]
 load-plugins=pylint_odoo
 score=n
-manifest_required_authors=Quilsoft
+manifest_required_authors=Sise
 manifest_required_keys=license,version
 manifest_deprecated_keys=description,active
 license_allowed=AGPL-3,GPL-2,GPL-2 or any later version,GPL-3,GPL-3 or any later version,LGPL-3,OPL-1

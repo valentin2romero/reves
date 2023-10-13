@@ -2,7 +2,6 @@ from odoo import fields, models
 
 
 class AccountInvoiceReport(models.Model):
-
     _inherit = "account.invoice.report"
 
     in_box_qty = fields.Float(

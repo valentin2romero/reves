@@ -1,6 +1,6 @@
 # -----------------------------------------------------------------------------------
 #
-#    Copyright (C) 2021  jeo Software  (http://www.jeo-soft.com.ar)
+#    Copyright (C) 2023  jeo Software  (http://www.jeo-soft.com.ar)
 #    All Rights Reserved.
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -22,8 +22,9 @@
     "version": "16.0.1.0.0",
     "category": "Tools",
     "summary": "Contabilidad cantidad de producto en caja",
-    "author": "WASF",
-    "development_status": "Alpha",  # "Alpha|Beta|Production/Stable|Mature"
+    "author": "Sise",
+    "license": "OPL-1",
+    "development_status": "Beta",  # "Alpha|Beta|Production/Stable|Mature"
     "depends": [
         "product",
         "sale",

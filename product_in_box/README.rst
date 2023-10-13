@@ -14,7 +14,7 @@ Product In Box
     :target: https://github.com/jobiols/cl-suelos/tree/13.0/product_in_box
     :alt: jobiols/cl-suelos
 
-|badge1| |badge2| 
+|badge1| |badge2|
 
 |
 

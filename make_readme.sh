@@ -6,8 +6,8 @@
 # $ pip install gen-odoo-readme
 
 gen-readme \
-	--org-name quilsoft-org \
-	--repo-name odoo-addons \
+	--org-name siseservicios \
+	--repo-name reves \
 	--branch 16.0 \
 	--addons-dir "$PWD" \
 	--gen-html
