@@ -4,10 +4,7 @@ from odoo.tests.common import Form
 from .common import ProductInBoxCommon
 
 
-@tagged(
-    "post_install",
-    "-at_install",
-)
+@tagged("post_install", "-at_install")
 class TestProductInBox(ProductInBoxCommon):
 
     @classmethod
