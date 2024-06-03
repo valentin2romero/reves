@@ -64,26 +64,28 @@ class ProductInBoxCommon(AccountTestInvoicingCommon):
 
         # ---------------- Productos ----------------------
 
-        cls.product = cls.env["product.product"].create(
-            {
-                "name": "product normal",
-                "prod_in_box_uom": "na",
-            }
-        )
-        cls.product_m = cls.env["product.product"].create(
-            {
-                "name": "product metros",
-                "prod_in_box": 3.5,
-                "prod_in_box_uom": "mt",
-            }
-        )
-        cls.product_m2 = cls.env["product.product"].create(
-            {
-                "name": "product_metros cuadrados",
-                "prod_in_box": 2.4,
-                "prod_in_box_uom": "mt2",
-            }
-        )
+        with Form(cls.env["product.product"]) as prod:
+            prod.name = "producto normal"
+            prod.prod_in_box_uom = "na"
+            prod.detailed_type = "consu"
+            prod.invoice_policy = "order"
+        cls.product = prod.save()
+
+        with Form(cls.env["product.product"]) as prod:
+            prod.name = "product metros"
+            prod.prod_in_box_uom = "mt"
+            prod.prod_in_box = 3.5
+            prod.detailed_type = "consu"
+            prod.invoice_policy = "order"
+        cls.product_m = prod.save()
+
+        with Form(cls.env["product.product"]) as prod:
+            prod.name = "product metros 2"
+            prod.prod_in_box_uom = "mt2"
+            prod.prod_in_box = 2.4
+            prod.detailed_type = "consu"
+            prod.invoice_policy = "order"
+        cls.product_m2 = prod.save()
 
         # ---------------- partners ----------------------
 
@@ -112,11 +114,13 @@ class ProductInBoxCommon(AccountTestInvoicingCommon):
 
     def _create_sale_order(cls, data):
         """Crear una orden de venta con productos"""
-        data = data if data else {}
+        data = data if data else []
         with Form(cls.env["sale.order"].with_company(cls.company_ri)) as so:
             so.partner_id = cls.res_partner_expresso
-            with so.order_line.new() as ol:
-                ol.product_id = data.get("product_id")
-                ol.price_unit = 250.0
-                ol.product_uom_qty = 1
+
+            for prod in data:
+                with so.order_line.new() as ol:
+                    ol.product_id = prod.get("product_id")
+                    ol.price_unit = prod.get("price_unit", 1)
+                    ol.product_uom_qty = prod.get("qty", 1)
         return so.save()
