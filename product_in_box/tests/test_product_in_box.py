@@ -1,6 +1,7 @@
-from odoo.addons.product_in_box.tests.common import ProductInBoxCommon
 from odoo.tests import tagged
 from odoo.tests.common import Form
+
+from .common import ProductInBoxCommon
 
 
 @tagged(
