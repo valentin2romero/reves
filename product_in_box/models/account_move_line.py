@@ -32,8 +32,7 @@ class AccountMoveLine(models.Model):
         for rec in self:
             if rec.prod_in_box_uom != "na":
                 qty = rec.in_box_qty / rec.prod_in_box if rec.prod_in_box else 0
-                frac = qty - int(qty)
-                if frac != 0:
+                if qty - int(qty) != 0:
                     qty += 1
                 rec.quantity = int(qty)
             else:
