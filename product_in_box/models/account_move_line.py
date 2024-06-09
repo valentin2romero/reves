@@ -44,10 +44,7 @@ class AccountMoveLine(models.Model):
         de producto"""
 
         for line in self:
-            if (
-                not line.exclude_from_invoice_tab
-                and line.product_id.prod_in_box_uom != "na"
-            ):
+            if line.move_id.is_invoice() and line.product_id.prod_in_box_uom != "na":
                 line.name = "%s Total %.2f %s" % (
                     line.product_id.name,
                     line.product_id.prod_in_box * line.quantity,
