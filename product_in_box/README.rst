@@ -10,9 +10,9 @@ Product In Box
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/licence-OPL--1-blue.png
-    :target: https://www.tldrlegal.com/license/open-public-license-v1-0-opl-1-0
-    :alt: License: OPL-1
+.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
+    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
+    :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/pre_commit-passed-green
     :target: https://pre-commit.com/
     :alt: Pre-Commit
