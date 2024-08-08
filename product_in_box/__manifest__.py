@@ -23,7 +23,7 @@
     "category": "Tools",
     "summary": "Contabilidad cantidad de producto en caja",
     "author": "Sise",
-    "license": "OPL-1",
+    "license": "AGPL-3",
     "development_status": "Beta",  # "Alpha|Beta|Production/Stable|Mature"
     "depends": [
         "product",

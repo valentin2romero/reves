@@ -39,14 +39,13 @@ class SaleOrderLine(models.Model):
         for rec in self:
             if rec.prod_in_box_uom != "na":
                 qty = rec.in_box_qty / rec.prod_in_box if rec.prod_in_box else 0
-                frac = qty - int(qty)
-                if frac != 0:
+                if qty - int(qty) != 0:
                     qty += 1
                 rec.product_uom_qty = int(qty)
             else:
                 rec.product_uom_qty = 1
 
-    def _prepare_invoice_line(self):
+    def _prepare_invoice_line(self, sequence=False):
         """Sobreescribimos este método para agregar los campos relacionados con la
             cantidad de producto por caja
 
@@ -54,7 +53,7 @@ class SaleOrderLine(models.Model):
         line.
         :param qty: float quantity to invoice
         """
-        res = super()._prepare_invoice_line()
+        res = super()._prepare_invoice_line(sequence=sequence)
         res["in_box_qty"] = self.in_box_qty
 
         return res

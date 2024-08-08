@@ -32,8 +32,7 @@ class AccountMoveLine(models.Model):
         for rec in self:
             if rec.prod_in_box_uom != "na":
                 qty = rec.in_box_qty / rec.prod_in_box if rec.prod_in_box else 0
-                frac = qty - int(qty)
-                if frac != 0:
+                if qty - int(qty) != 0:
                     qty += 1
                 rec.quantity = int(qty)
             else:
@@ -44,10 +43,7 @@ class AccountMoveLine(models.Model):
         de producto"""
 
         for line in self:
-            if (
-                not line.exclude_from_invoice_tab
-                and line.product_id.prod_in_box_uom != "na"
-            ):
+            if line.move_id.is_invoice() and line.product_id.prod_in_box_uom != "na":
                 line.name = "%s Total %.2f %s" % (
                     line.product_id.name,
                     line.product_id.prod_in_box * line.quantity,
