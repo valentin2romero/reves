@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="document_tax_totals_inherit" inherit_id="account.document_tax_totals">
+        <xpath expr="//t[@t-as='subtotal']" position="attributes">
+            <attribute name="t-if">not doc.company_id.hide_tax_sale_order_report</attribute>
+        </xpath>
+    </template>
+</odoo>
