@@ -1,6 +1,6 @@
 {
     "name": "Sale Order Report Untaxed",
-    "version": "16.0.1.0.0",
+    "version": "16.0.1.0.1",
     "author": "Valentin Romero",
     "summary": "Print untaxed sale order",
     "website": "",
