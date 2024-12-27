@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="custom_header" active="True">
+            <div class="row">
+                <div class="col-5"/>
+                <div class="col-2" style="display:flex !important; justify-content:center; margin-left:53px; margin-bottom:5px;">
+                    <div style="width:35px; height:40px; border:black 1px solid; align-items:center; display:flex; justify-content:center; text-align:center;">
+                        <h3 style="color:black; margin:0 !important;"><strong>X</strong></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p style="font-size: 11px;">Doc. no válido como factura</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3 mb4">
+                    <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height: 45px;" alt="Logo"/>
+                </div>
+                <div class="col-9 text-end" style="margin-top:22px;" t-field="company.report_header" name="moto"/>
+            </div>
+            <div t-if="company.logo or company.report_header" class="row zero_min_height">
+                <div class="col-12">
+                    <div style="border-bottom: 1px solid black;"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6" name="company_address">
+                    <ul class="list-unstyled">
+                        <li t-if="company.is_company_details_empty"><t t-esc="company.partner_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'/></li>
+                        <li t-else=""><t t-esc="company.company_details"/></li>
+                        <li t-if="forced_vat">
+                            <t t-esc="company.country_id.vat_label or 'Tax ID'"/>:
+                            <span t-esc="forced_vat"/>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+    </template>
+    <template id="custom_footer" active="True">
+        <div>
+            <div class="text-center" style="border-top: 1px solid black;">
+                <ul class="list-inline mb4">
+                    <div t-field="company.report_footer"/>
+                </ul>
+                <div t-if="report_type == 'pdf' and display_name_in_footer" class="text-muted">
+                    <span t-field="o.name"/>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="report_saleorder_document_inherit" inherit_id="sale.report_saleorder_document">
+
+        <!-- Set custom header and footer -->
+        <xpath expr="//t[contains(@t-set, 'address')]" position="before">
+            <t t-set="custom_header" t-value="'sale_order_report_custom.custom_header'"/>
+            <t t-set="custom_footer">
+                <t t-if="not company">
+                    <!-- Multicompany -->
+                    <t t-if="company_id">
+                        <t t-set="company" t-value="company_id"/>
+                    </t>
+                    <t t-elif="o and 'company_id' in o and o.company_id.sudo()">
+                        <t t-set="company" t-value="o.company_id.sudo()"/>
+                    </t>
+                    <t t-else="else">
+                        <t t-set="company" t-value="res_company"/>
+                    </t>
+                </t>
+                <t t-call="sale_order_report_custom.custom_footer"/>
+            </t>
+        </xpath>
+        
+
+        <xpath expr="//div[@id='informations']" position="inside">
+            <div t-if="doc.pricelist_id" class="col-auto col-3 mw-100 mb-2">
+                <strong>Tarifa de venta:</strong>
+                <p class="m-0" t-field="doc.pricelist_id.name"/>
+            </div>
+        </xpath>
+
+
+        <xpath expr="//t[@t-set='address']//div[@t-field='doc.partner_id']" position="after">
+            <div t-if="doc.partner_id.phone">Teléfono: <span t-field="doc.partner_id.phone"/></div>
+        </xpath>
+
+    </template>
+
+</odoo>
