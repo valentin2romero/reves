@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<templates>
+    <t
+        t-name="sale_stock_available.QtyDetailPopOver"
+        t-inherit="sale_stock.QtyDetailPopOver"
+        t-inherit-mode="extension"
+        owl="1"
+    >
+        <xpath expr="//table//tbody" position="attributes">
+            <attribute name="t-attf-style">{{ 'display: none !important' }}</attribute>
+        </xpath>
+        <xpath expr="//table//tbody" position="after">
+            <tbody>
+                <tr>
+                    <td>
+                        <strong>Disponible</strong>
+                    </td>
+                    <td>
+                        <b t-out='props.record.data.immediately_usable_qty_today' /> <t
+                            t-out="props.record.data.product_uom[1]"
+                        />
+                    </td>
+                </tr>
+            </tbody>
+        </xpath>
+    </t>
+</templates>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- KANBAN -->
+    <record id="product_template_kanban_stock_view_inherit" model="ir.ui.view">
+        <field name="name">product.template.product.kanban.inherit</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="stock.product_template_kanban_stock_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@t-if='record.show_on_hand_qty_status_button.raw_value']" position="replace">
+                <div t-if="record.show_on_hand_qty_status_button.raw_value">Físico: <field name="qty_available"/> <field name="uom_id"/></div>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_stock_available_kanban_inherit" model="ir.ui.view">
+        <field name="name">Quantity available to promise (kanban)</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="stock_available.view_stock_available_kanban"/>
+        <field name="arch" type="xml">
+            <xpath expr="//*[text()='Available to Promise: ' or text()='Disponible para prometer: ' or text()='Disponible: ']" position="replace">
+                <div t-if="record.type.raw_value == 'product'">Disponible: <field name="immediately_usable_qty"/> <field name="uom_id"/></div>
+            </xpath>
+        </field>
+    </record>
+    <record id="product_template_kanban_stock_unreserved_view_inherit" model="ir.ui.view">
+        <field name="name">Product Template Kanban Stock</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="stock_available_unreserved.product_template_kanban_stock_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//*[text()='Unreserved: ' or text()='No reservado: ']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+    <!-- TREE -->
+    <record id="view_stock_product_template_tree_inherit" model="ir.ui.view">
+        <field name="name">product.template.stock.tree.inherit</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="stock.view_stock_product_template_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='qty_available']" position="attributes">
+                <attribute name="optional">hide</attribute>
+                <attribute name="string">Físico</attribute>
+            </xpath>
+            <xpath expr="//field[@name='virtual_available']" position="attributes">
+                <attribute name="optional">hide</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_stock_available_product_template_tree_inherit" model="ir.ui.view">
+        <field name="name">Quantity available to promise (tree)</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="stock_available.view_stock_available_product_template_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='immediately_usable_qty']" position="attributes">
+                <attribute name="string">Disponible</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_stock_product_template_tree_unreserved_inherit" model="ir.ui.view">
+        <field name="name">product.template.stock.tree.inherit.unreserved</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="stock_available_unreserved.view_stock_product_template_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='qty_available_not_res']" position="attributes">
+                <attribute name="optional">hide</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_stock_product_tree_inherit" model="ir.ui.view">
+        <field name="name">product.stock.tree.inherit</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="stock.view_stock_product_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='qty_available']" position="attributes">
+                <attribute name="string">Físico</attribute>
+                <attribute name="optional">hide</attribute>
+            </xpath>
+            <xpath expr="//field[@name='virtual_available']" position="attributes">
+                <attribute name="optional">hide</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="vview_stock_available_product_tree_inherit" model="ir.ui.view">
+        <field name="name">Quantity available to promise (variant tree)</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="stock_available.view_stock_available_product_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='immediately_usable_qty']" position="attributes">
+                <attribute name="string">Disponible</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_stock_product_tree_unreserved_inherit" model="ir.ui.view">
+        <field name="name">product.template.stock.tree.inherit.unreserved</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="stock_available_unreserved.view_stock_product_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='qty_available_not_res']" position="attributes">
+                <attribute name="optional">hide</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>
